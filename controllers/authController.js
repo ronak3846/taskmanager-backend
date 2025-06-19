@@ -1,6 +1,7 @@
 // controllers/authController.js
 import Employee from "../models/employeeModel.js";
-import bcrypt from "bcrypt";
+import argon2 from "argon2";
+
 
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -12,7 +13,7 @@ export const loginUser = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await argon2.compare(password, user.password);
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid password" });
     }
@@ -42,7 +43,7 @@ export const register = async (req, res) => {
       return res.status(400).json({ message: "Email already registered" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await argon2.hash(password, 10);
 
     const newUser = new Employee({
       firstname,

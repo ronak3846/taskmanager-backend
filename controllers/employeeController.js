@@ -1,34 +1,3 @@
-// // controllers/employeeController.js
-// import Employee from "../models/employeeModel.js";
-
-// // ✅ For Admin Dashboard: get all employees
-// export const getAllEmployees = async (req, res) => {
-//   try {
-//     const employees = await Employee.find({ role: "employee" }).select(
-//       "_id firstname email taskCount"
-//     );
-//     res.status(200).json(employees);
-//   } catch (error) {
-//     res.status(500).json({ message: "Server error", error: error.message });
-//   }
-// };
-
-// // ✅ For Employee Dashboard: get tasks of specific employee
-// export const getEmployeeTasks = async (req, res) => {
-//   try {
-//     const employee = await Employee.findById(req.params.id);
-
-//     if (!employee) {
-//       return res.status(404).json({ message: "Employee not found" });
-//     }
-
-//     res.status(200).json(employee.tasks || []);
-//   } catch (error) {
-//     res.status(500).json({ message: "Server error", error: error.message });
-//   }
-// };
-
-
 import Employee from "../models/employeeModel.js";
 
 // Existing Controllers
@@ -151,7 +120,7 @@ export const addTaskComment = async (req, res) => {
   }
 };
 
-import bcrypt from "bcrypt";
+
 
 // ✅ View profile
 export const getProfile = async (req, res) => {
