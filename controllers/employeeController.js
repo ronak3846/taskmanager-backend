@@ -1,4 +1,5 @@
 import Employee from "../models/employeeModel.js";
+import argon2 from "argon2";
 
 // Existing Controllers
 export const getAllEmployees = async (req, res) => {
@@ -155,7 +156,7 @@ export const changePassword = async (req, res) => {
     const user = await Employee.findById(req.params.id);
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    const isMatch = await argon2.verify()(currentPassword, user.password);
     if (!isMatch)
       return res.status(400).json({ message: "Incorrect current password" });
 

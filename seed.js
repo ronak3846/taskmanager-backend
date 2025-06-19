@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import bcrypt from "bcryptjs";
+import argon2 from "argon2";
 import Employee from "./models/employeeModel.js";
 
 dotenv.config();
@@ -18,7 +18,7 @@ const createSeedData = async () => {
   await Employee.deleteMany(); // Clear old data
 
   // 👨‍💼 Admin with secure password
-  const adminPassword = await bcrypt.hash("Admin@123", 10);
+  const adminPassword = await argon2.hash("Admin@123");
   const admin = {
     firstname: "Admin",
     email: "admin@example.com",
@@ -26,7 +26,7 @@ const createSeedData = async () => {
     role: "admin",
   };
 
-  // 👨‍🔧 5 Employees with sample tasks and unique passwords
+  // 👨‍🔧 5 Employees with sample tasks and hashed passwords
   const employees = [
     {
       firstname: "Aarav",
@@ -56,7 +56,7 @@ const createSeedData = async () => {
   ];
 
   for (const emp of employees) {
-    emp.password = await bcrypt.hash(emp.plainPassword, 10);
+    emp.password = await argon2.hash(emp.plainPassword);
     emp.role = "employee";
     delete emp.plainPassword;
 

@@ -13,7 +13,7 @@ export const loginUser = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const isMatch = await argon2.compare(password, user.password);
+    const isMatch = await argon2.verify(password, user.password);
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid password" });
     }
