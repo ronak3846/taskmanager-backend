@@ -25,6 +25,23 @@ export const getEmployeeTasks = async (req, res) => {
   }
 };
 
+// controllers/employeeController.js
+
+export const deleteEmployee = async (req, res) => {
+  try {
+    const employee = await Employee.findByIdAndDelete(req.params.id);
+    if (!employee) {
+      return res.status(404).json({ message: "Employee not found" });
+    }
+    res.json({ message: "Employee deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+
+
 // ✅ Accept Task: newTask → active
 export const acceptTask = async (req, res) => {
   try {

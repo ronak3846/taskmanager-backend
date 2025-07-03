@@ -24,6 +24,7 @@ import {
   updateProfile,
   getProfile,
   changePassword,
+  deleteEmployee,
 } from "../controllers/employeeController.js";
 
 const router = express.Router();
@@ -31,6 +32,9 @@ const router = express.Router();
 // Employee Dashboard APIs
 router.get("/", getAllEmployees);
 router.get("/:id/tasks", getEmployeeTasks);
+
+router.delete("/:id", deleteEmployee);
+
 
 router.put("/:id/profile", updateProfile);
 router.get("/:id/profile", getProfile);
