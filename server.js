@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000;
 const corsOptions = {
   origin: [
     "http://localhost:5173", // local dev
-    "https://taskmanager-frontend-ochre.vercel.app", // Vercel frontend
+    "https://tasksuite.vercel.app/", // Vercel frontend
   ],
   credentials: true,
 };
